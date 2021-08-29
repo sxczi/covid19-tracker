@@ -35,7 +35,7 @@ async function getCovidData() {
 
 getCovidData();
 
-setInterval(() => getCovidData(), 43200000)
+setInterval(() => getCovidData(), 600000)
 
 app.get('/covid', (req, res) => {
     const data = JSON.parse(fs.readFileSync('./covid.json', 'utf-8'));

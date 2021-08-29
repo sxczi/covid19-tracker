@@ -1,0 +1,1 @@
+start: yarn && tsc && node server

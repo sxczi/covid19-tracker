@@ -7,7 +7,18 @@ import express from 'express';
 const app = express();
 
 async function getCovidData() {
-    const browser = await puppeteer.launch();
+    const chromeOptions = {
+        headless: true,
+        defaultViewport: null,
+        args: [
+            "--incognito",
+            "--no-sandbox",
+            "--single-process",
+            "--no-zygote"
+        ],
+    };
+
+    const browser = await puppeteer.launch(chromeOptions);
     const page = await browser.newPage();
 
     await page.goto('https://atlasgis.maps.arcgis.com/apps/opsdashboard/index.html#/e1105263db8541bcae0cb46dd4adc448', {

@@ -46,7 +46,9 @@ async function getCovidData() {
 
 getCovidData();
 
-setInterval(() => getCovidData(), 600000)
+setInterval(() => getCovidData(), 600000);
+
+app.use(express.static('./front-end/build'));
 
 app.get('/covid', (req, res) => {
     const data = JSON.parse(fs.readFileSync('./covid.json', 'utf-8'));
@@ -54,6 +56,8 @@ app.get('/covid', (req, res) => {
     res.json(data);
 });
 
-app.listen(3001, () => {
-    console.log('Server running on PORT 3001');
+const port = process.env.PORT || 3001;
+
+app.listen(port, () => {
+    console.log('Server running on PORT ' + port);
 });

@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn && tsc && node server",
+    "start": "yarn && tsc server.ts --esModuleInterop && node server",
     "dev": "nodemon -e ts --exec 'yarn start'"
   },
   "dependencies": {

@@ -26,7 +26,7 @@ async function getCovidData() {
   const chromeOptions = {
     headless: true,
     defaultViewport: null,
-    args: ["--incognito", "--no-sandbox", "--single-process", "--no-zygote"],
+    args: ["--incognito", "--no-sandbox", "--single-process", "--no-zygote", '--disable-setuid-sandbox'],
   };
 
   const browser = await puppeteer.launch(chromeOptions);
@@ -89,12 +89,12 @@ async function getCovidData() {
 
 getCovidData();
 
-setInterval(() => getCovidData(), 600000);
+setInterval(() => getCovidData(), 43200000);
 
 app.use(express.static("./front-end/build"));
 
 app.get("/covid", async (req, res) => {
-  const data = await dataModel.findById(modelId);
+  const data = await dataModel.findById(modelId, { _id: 0, __v: 0 });
 
   res.json(data);
 });
